@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"time"
 
-	"golang.org/x/net/context"
-	"googlemaps.github.io/maps"
+	"uber_movies/Godeps/_workspace/src/golang.org/x/net/context"
+	"uber_movies/Godeps/_workspace/src/googlemaps.github.io/maps"
 )
 
 var (

@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/gorilla/mux"
+	"uber_movies/Godeps/_workspace/src/github.com/gorilla/mux"
 )
 
 func DefaultHandler(rw http.ResponseWriter, req *http.Request) {

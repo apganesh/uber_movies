@@ -1,0 +1,25 @@
+{
+	"ImportPath": "uber_movies",
+	"GoVersion": "go1.5",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/gorilla/context",
+			"Rev": "1c83b3eabd45b6d76072b66b746c20815fb2872d"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Rev": "26a6070f849969ba72b72256e9f14cf519751690"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "04b9de9b512f58addf28c9853d50ebef61c3953e"
+		},
+		{
+			"ImportPath": "googlemaps.github.io/maps",
+			"Rev": "d33d1657b4ea2b6c70ccea185a26f8abff9d889e"
+		}
+	]
+}
