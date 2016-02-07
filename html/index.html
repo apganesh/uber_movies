@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>San Francisco - Movie Locator</title>
+        <link href="movie_map.css" media="screen" rel="stylesheet" type="text/css" />
+        <style>
+        table {
+            border-spacing:1;
+            border-collapse: collapse;
+        }
+        td,tr {
+            border-spacing:1;
+            border-collapse: collapse;
+        }
+        .srch-results td:hover {
+            background-color: #d3d3d3;
+        }
+        
+        </style>
+    </head>
+
+    <body>
+        <div id='container'>
+            <form>
+            <fieldset>
+            <legend>Movie</legend>
+                <b><label>Name: </label></b><label type="text" id="moviename"></label><br>
+                <b><label>Released: </label></b><label type="text" id="released"></label><br>
+                <b><label>Director: </label></b><label type="text" id="director"></label><br>
+                <b><label>Actors: </label></b><label type="text" id="actors"></label><br>
+            </fieldset>
+            </form>
+
+            <form>
+            <fieldset>
+            <legend>Locations</legend>
+            <table id="results"></table>
+            </fieldset>
+            </form>
+        </div>
+
+
+        <div id='searchbox'>
+            <input onclick="setDefaultLocation();" type=button value="Default Location">
+            <input onclick="updateCurrentLocation();" type=button value="Current Location">
+            <div id="srch-table">
+                <input id="srch-input"  type="text" placeholder="Enter the movie name or '*' for all listings">
+                <table id="srch-results" class="restable"></table>
+            </div>
+        </div>
+ 
+        <div id='gmap-canvas'></div>
+        
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places" ></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script type="text/javascript" src="movie_map.js"></script>
+
+    </body>
+</html>
