@@ -23,6 +23,7 @@ var defaultLocation;
 
 // cache variables for the current values
 var curLocation;
+var curMovie;
 // All the icons are from http://maps.google.com/mapfiles/ms/icons/ 
 var anchor_icon = 'blue-dot.png'
 var pop_icon = 'red-dot.png'
@@ -57,6 +58,7 @@ function initializeMap() {
 	// reusing this m_infowindow instead of creating for every click on pin
 	m_infowindow = new google.maps.InfoWindow;
 
+	curMovie = ""
 	// Create the default markers for anchor_marker and user_selected marker
 	anchor_marker = new google.maps.Marker({
 		map: map,
@@ -73,11 +75,11 @@ function initializeMap() {
 		zIndex: 10,
 		optimized: false
 	});
-	//setDefaultLocation()
 
 	google.maps.event.addListener(anchor_marker, 'dragend', function(event) {
 		placeMarkerAndPanTo(event.latLng, map);
 	});
+
 	google.maps.event.addListener(anchor_marker, 'click', function() {
 		infowindow.open(anchor_marker.get('map'), anchor_marker);
 	});
@@ -92,10 +94,6 @@ function setDefaultLocation() {
 	map.setCenter(defaultLocation)
 	setCurLocation(defaultLocation.lat, defaultLocation.lng)
 	placeMarkerAndPanTo(defaultLocation, map)
-}
-
-function setCurrentLocation() {
-	updateCurrentLocation()
 }
 
 function setCurLocation(lat, lng) {
@@ -130,7 +128,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 function getMovieLocations(moviename) {
-
+	curMovie = moviename
 	var searchurl = "/Locations/"+ moviename;
 
 	$.ajax({
@@ -167,7 +165,6 @@ $(document).ready(function () {
         options.type = "GET";
         options.data = {};
         options.dataType = "json";
-
         
         options.success = function (data) {
             populateMovieNames(data,search_word);
@@ -235,7 +232,7 @@ function populateMovieLocations (moviename, data) {
 
 		innerhtml = innerhtml + "<tr><td>"  
 		innerhtml = innerhtml + "<a onclick= " + 'showInfoWindow('+i+')' +' onmouseover= popMarker(' + loc.lat + ',' + loc.lng+ ')>' + locdata[i].Address + "</a><br>"
-		innerhtml = innerhtml + "<a style=\"color:blue\;\" onclick= " + 'findDirections(' + loc.lat + ',' + loc.lng + ',\"DRIVING\"'+ ',' + i +')>' + 'Drive</a>'
+		innerhtml = innerhtml + "<a style=\"color:darkolivegreen\;\" onclick= " + 'findDirections(' + loc.lat + ',' + loc.lng + ',\"DRIVING\"'+ ',' + i +')>' + '<b>Directions</b></a>'
 		innerhtml = innerhtml + "</td></tr>" ;
 	}
 	map.fitBounds(bounds);
@@ -249,6 +246,7 @@ function showInfoWindow(id) {
 function popMarker(lat, lng) {
 	var loc = new google.maps.LatLng(lat, lng) 
 	pop_marker.setPosition(loc);
+	pop_marker.setVisible(true);
 	m_infowindow.close();
 	directionsDisplay.setDirections({routes: []});
 }
@@ -309,17 +307,19 @@ function showMarkers() {
 
 // Deletes all markers in the array by removing references to them.
 function deleteMarkers() {
+	directionsDisplay.setDirections({routes:[]})
+	pop_marker.setVisible(false)
 	clearMarkers();
 	markers = [];
 }
 
 // Get the json for a given URL
-function GetJson(yourUrl) {
-	var Httpreq = new XMLHttpRequest(); // a new request
-	Httpreq.open("GET", yourUrl, false);
-	Httpreq.send(null);
-	return Httpreq.responseText;
-}
+// function GetJson(yourUrl) {
+// 	var Httpreq = new XMLHttpRequest(); // a new request
+// 	Httpreq.open("GET", yourUrl, false);
+// 	Httpreq.send(null);
+// 	return Httpreq.responseText;
+// }
 
 // Place the anchor_marker and pan to the location
 function placeMarkerAndPanTo(latLng, map) {
@@ -340,6 +340,7 @@ function placeMarkerAndPanTo(latLng, map) {
 
 	anchor_marker.setPosition(latLng);
 	setCurLocation(latLng.lat(), latLng.lng())
+	directionsDisplay.setDirections({routes: []});
 }
 
 function findDirections(dlat, dlng, mode, id) {
