@@ -175,7 +175,6 @@ func (m *MovieDB) readJsonFile() error {
 
 	response, err := http.Get(jsonurl)
 
-	fmt.Printf("%s %d\n", response.Status, response.StatusCode)
 
 	if err != nil || response.StatusCode == 404 {
 		return errors.New("Cannot find JsonFile")

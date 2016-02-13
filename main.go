@@ -30,18 +30,17 @@ func main() {
 	r := mux.NewRouter()
 
 	e := initializeMovieServer()
-	fmt.Println(e)
+  if e != nil {
+		panic(e)
+  }
 
 	r.HandleFunc("/Movies/{searchWord}", MoviesHandler)
 	r.HandleFunc("/Movies/", DefaultMoviesHandler)
 	r.HandleFunc("/Locations/{movieName}", LocationsHandler)
 	//r.PathPrefix("/").Handler(http.FileServer(http.Dir("./html/")))
 	if e != nil {
-		fmt.Println("Setting the errorhandler")
 		r.HandleFunc("/", ErrorHandler)
-		//r.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("errors/"))))
 	} else {
-		fmt.Println("Setting the html")
 		r.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("html/"))))
 	}
 

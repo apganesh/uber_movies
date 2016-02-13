@@ -7,23 +7,18 @@
         <link href="movie_map.css" media="screen" rel="stylesheet" type="text/css" />
         <style>
         table {
-            border-spacing:1;
             border-collapse: collapse;
         }
         td,tr {
-            border-spacing:1;
             border-collapse: collapse;
         }
-        .srch-results td:hover {
-            background-color: #d3d3d3;
-        }
+        
         
         </style>
     </head>
 
     <body>
         <div id='container'>
-            <form>
             <fieldset>
             <legend><b>Movie Information</b></legend>
                 <b><label>Name: </label></b><label type="text" id="moviename"></label><br>
@@ -31,14 +26,14 @@
                 <b><label>Director: </label></b><label type="text" id="director"></label><br>
                 <b><label>Actors: </label></b><label type="text" id="actors"></label><br>
             </fieldset>
-            </form>
 
-            <form>
             <fieldset>
             <legend><b>Locations</b></legend>
+            <div id="resultsdiv" class="resultsdiv">
             <table class="movieresults" id="results"></table>
+            </div>
             </fieldset>
-            </form>
+
         </div>
 
 
