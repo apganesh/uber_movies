@@ -30,9 +30,9 @@ func main() {
 	r := mux.NewRouter()
 
 	e := initializeMovieServer()
-  if e != nil {
+	if e != nil {
 		panic(e)
-  }
+	}
 
 	r.HandleFunc("/Movies/{searchWord}", MoviesHandler)
 	r.HandleFunc("/Movies/", DefaultMoviesHandler)
