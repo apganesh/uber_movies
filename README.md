@@ -2,6 +2,7 @@
 
 Web service providing  the locations of a movie being filmed in San Francisco
 
+[Movie Locator][app-link]
 ### Motivation
 While picking up GO figured to do a full fledged web app using GO for the back end and Google Maps API for the display of the locations where a particular movie was filmed.
 
@@ -14,3 +15,4 @@ Javascript / Google Maps for frontend
 
 <hr>
 [uber-challenge]:https://github.com/uber/coding-challenge-tools/blob/master/coding_challenge.md
+[app-link]:https://uber-movies-ga.herokuapp.com/
